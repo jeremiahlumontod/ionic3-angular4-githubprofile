@@ -23,7 +23,7 @@ export class GithubService {
     passed on. Will return the results as an Observable
   */
   mockGetUserInformation(username: string):Observable<User> {
-    return Observable.of(USER_LIST.filter(user => user.name === username)[0])
+    return Observable.of(USER_LIST.filter(user => user.name === username)[0]);
   }
 
   /*
@@ -32,7 +32,7 @@ export class GithubService {
 
   */
   mockGetRepositoryInformation(username: string): Observable<Repository[]> {
-    return Observable.of(REPOSITORY_LIST.filter(repository => repository.owner.name === username))
+    return Observable.of(REPOSITORY_LIST.filter(repository => repository.owner.name === username));
   }
     
 
