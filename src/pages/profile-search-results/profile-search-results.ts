@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { GithubService } from '../../providers/github/github.service';
+import { User } from '../../models/user.interface';
+
 /**
  * Generated class for the ProfileSearchResultsPage page.
  *
@@ -11,10 +13,11 @@ import { GithubService } from '../../providers/github/github.service';
 @IonicPage()
 @Component({
   selector: 'page-profile-search-results',
-  templateUrl: 'profile-search-results.html',
+  templateUrl: 'profile-search-results-page.html',
 })
 export class ProfileSearchResultsPage {
   username: string;
+  user: User;
 
   constructor(private githubService: GithubService, private navCtrl: NavController, private navParams: NavParams) {
   }
@@ -29,7 +32,10 @@ export class ProfileSearchResultsPage {
   }
 
   getUserInformation(): void {
-    this.githubService.mockGetUserInformation(this.username).subscribe(data => console.log(data));
+    this.githubService.mockGetUserInformation(this.username).subscribe((data: User) => {
+      this.user = data;
+      console.log(data)
+    });
     
   }
 }
