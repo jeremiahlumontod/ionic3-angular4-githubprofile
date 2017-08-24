@@ -16,6 +16,12 @@
 <ion-content padding>
   <ion-item>
     <ion-label floating>User name</ion-label>
-    <ion-input></ion-input>
+    <ion-input type="text" [(ngModel)]="username"></ion-input>
   </ion-item>
+
+  <ion-fab bottom right>
+    <button ion-fab>
+      <ion-icon name="search"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>
