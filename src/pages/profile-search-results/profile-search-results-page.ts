@@ -2,13 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { GithubService } from '../../providers/github/github.service';
 import { User } from '../../models/user.interface';
-
-/**
- * Generated class for the ProfileSearchResultsPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+import { Repository } from '../../models/repository.interface';
 
 @IonicPage()
 @Component({
@@ -18,6 +12,7 @@ import { User } from '../../models/user.interface';
 export class ProfileSearchResultsPage {
   username: string;
   user: User;
+  repositories: Repository[];
 
   constructor(private githubService: GithubService, private navCtrl: NavController, private navParams: NavParams) {
   }
@@ -36,6 +31,13 @@ export class ProfileSearchResultsPage {
       this.user = data;
       console.log(data)
     });
-    
+  
+    this.githubService.mockGetRepositoryInformation(this.username).subscribe(
+      (data: Repository[]) => {
+        this.repositories = data;
+        console.log('mockGetRepositoryInformation username:' + this.username);
+        console.log('mockGetRepositoryInformation data:' + data);
+      }
+    )
   }
 }
