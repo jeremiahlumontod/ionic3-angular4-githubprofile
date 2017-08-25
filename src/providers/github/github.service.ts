@@ -27,6 +27,12 @@ export class GithubService {
     .catch((error: Response) => Observable.throw(error.json().error || "Server error."));
   }
 
+  getRepositoryInformation(username: string): Observable<Repository[]> {
+    return this.http.get(`${this.baseUrl}/${username}/${this.reposUrl}`)
+      .map((data: Response) => data.json() as Repository[])
+      .catch((error: Response) => Observable.throw(error.json().error || "Server error."));
+  }
+  
   /*
     Finding the username from within USER_LIST equal to the username param 
     passed on. Will return the results as an Observable
@@ -44,5 +50,16 @@ export class GithubService {
     return Observable.of(REPOSITORY_LIST.filter(repository => repository.owner.name === username));
   }
     
+  // private handleError(error: Response | any) {
+  //   return Observable.throw(error.json().error || "Server error.");
+  // }
 
+  private logData(response: Response): void {
+    console.log(response);
+  }
+
+  private extractData(response: Response) {
+    this.logData(response);
+    return response.json();
+  }
 }
