@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
-// import { Http, Response } from '@angular/http';
+import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/of';
+// import 'rxjs/add/observable/do';
+import 'rxjs/add/observable/throw';
 
 import { User } from '../../models/user.interface';
 import { USER_LIST } from '../../mocks/user.mocks';
@@ -15,7 +18,13 @@ export class GithubService {
   baseUrl: string = 'https://api.github.com/users';
   reposUrl: string = 'repos';
 
-  constructor() {
+  constructor(private http: Http) {
+  }
+
+  getUserInformation(username: string): Observable<User> {
+    return this.http.get(`${this.baseUrl}/${username}`)
+    .map((data: Response) => data.json())
+    .catch((error: Response) => Observable.throw(error.json().error || "Server error."));
   }
 
   /*
