@@ -8,7 +8,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * on Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({
+  segment: 'profile'
+})
 @Component({
   selector: 'page-profile-search',
   templateUrl: 'profile-search.page.html',
