@@ -33,6 +33,15 @@ export class ProfileSearchResultsPage {
         console.log(data);
       }
     );
+
+    this.githubService.getRepositoryInformation(this.username).subscribe(
+      (data: Repository[]) => {
+        this.repositories = data;
+        console.log('getRepositoryInformation username:' + this.username);
+        console.log('getRepositoryInformation data:' + data);
+      }
+    )
+    
     // this.githubService.mockGetUserInformation(this.username).subscribe(
     //   (data: User) => {
     //     this.user = data;
